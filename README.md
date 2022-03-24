@@ -4,14 +4,15 @@
   - [Step 1: Install JAVA on your MAC](#step-1-install-java-on-your-mac)
   - [Step 2: Install Spark on your MAC](#step-2-install-spark-on-your-mac)
   - [Step 3: Installing `python3`](#step-3-installing-python3)
-  - [Step 4: Running PySpark shell](#step-4-running-pyspark-shell)
-- [Running small program with PySpark Shell](#running-small-program-with-pyspark-shell)
-- [Analyzing Spark Jobs using Spark Context Web UI](#analyzing-spark-jobs-using-spark-context-web-ui)
-- [Running Jupyter Notebook ( In local cluster and client mode )](#running-jupyter-notebook--in-local-cluster-and-client-mode-)
+  - [Step 4: Running PySpark shell in your MAC laptop](#step-4-running-pyspark-shell-in-your-mac-laptop)
+- [Running small program with PySpark Shell in your MAC laptop](#running-small-program-with-pyspark-shell-in-your-mac-laptop)
+- [Analyzing Spark Jobs using Spark Context Web UI  in your MAC laptop](#analyzing-spark-jobs-using-spark-context-web-ui--in-your-mac-laptop)
+- [Running Jupyter Notebook ( In local cluster and client mode ) in your MAC laptop](#running-jupyter-notebook--in-local-cluster-and-client-mode--in-your-mac-laptop)
   - [Step 1: Setting environment variable and starting notebook](#step-1-setting-environment-variable-and-starting-notebook)
   - [Step 2: installing `findspark`](#step-2-installing-findspark)
   - [Step 3 connecting spark with notebook shell](#step-3-connecting-spark-with-notebook-shell)
-- [Installing Multi-Node Spark Cluster at AWS](#installing-multi-node-spark-cluster-at-aws)
+- [Installing Multi-Node Spark Cluster in AWS Cloud](#installing-multi-node-spark-cluster-in-aws-cloud)
+  - [Step 1: Creating EMR cluster at AWS cloud](#step-1-creating-emr-cluster-at-aws-cloud)
       - [What is Amazon EMR?](#what-is-amazon-emr)
 
 You will able to install spark and also run spark shell and `pyspark` shell on your mac.
@@ -62,13 +63,13 @@ If you already have `python3` then ignore this step. In order to check type `pyt
 
    ![](https://i.imgur.com/J5EFm7c.png)
 
-## Step 4: Running PySpark shell
+## Step 4: Running PySpark shell in your MAC laptop
 
 Now run `pyspark` to see the spark shell in python.
 
 ![](https://i.imgur.com/kSPwkyN.png)
 
-# Running small program with PySpark Shell
+# Running small program with PySpark Shell in your MAC laptop
 
 You will learn about spark shell, local cluster, driver, executor and Spark Context UI.
 
@@ -96,7 +97,7 @@ df.show()
 
 ![](https://i.imgur.com/5FNMXz9.png)
 
-# Analyzing Spark Jobs using Spark Context Web UI
+# Analyzing Spark Jobs using Spark Context Web UI  in your MAC laptop
 
 To monitor and investigate your spark application you can check spark context web UI.
 
@@ -109,7 +110,7 @@ To monitor and investigate your spark application you can check spark context we
 - Storage Memory it took maximum `434.4 MB`. This is sum of overall JVM.
 - You can access this spark context UI till your spark shell is open. Once you quit spark shell you will loose the access to this UI.
 
-# Running Jupyter Notebook ( In local cluster and client mode )
+# Running Jupyter Notebook ( In local cluster and client mode ) in your MAC laptop
 
 Data scientist use `Jupyter` Notebook to develop & explore application step by step. Spark programming in python requires you to have python on your machine.
 
@@ -185,7 +186,7 @@ spark.read.option("multiline","true").json("/Users/rupeshti/workdir/git-box/lear
 
 ![](https://i.imgur.com/ttPrHim.png)
 
-# Installing Multi-Node Spark Cluster at AWS
+# Installing Multi-Node Spark Cluster in AWS Cloud
 
 At AWS, Amazon EMR (Elastic Map & Reduce)  service can be used to create `Hadoop` cluster with `spark`.
 
@@ -207,8 +208,6 @@ Benefits of using Amazon EMR are:
 3. You can set up CloudWatch alerts to notify you of changes in your infrastructure and take actions immediately 
 4. EMR has optimized runtime which speed up your analysis and save both time and money 
 5. You can submit your workload to either EC2 or EKS using EMR 
-
-
 
 - I am create cluster with 1 master and 3 worker nodes.
 ![](https://i.imgur.com/LaDEEwU.png)
