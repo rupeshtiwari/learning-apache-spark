@@ -245,6 +245,9 @@ Benefits of using Amazon EMR are:
   - Click on executers tab and note you get 3 executers and check their memory allocation.
     ![](https://i.imgur.com/0pb69s4.png)
 
-👉 Note mostly you will not use pyspark shell in real world people are using notebooks. 
+
 
 ## Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud 
+
+👉 Note: mostly you will not use pyspark shell in real world people are using notebooks. 
+Therefore, we are going to use zepeline notebook next. 
