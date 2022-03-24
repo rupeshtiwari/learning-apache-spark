@@ -299,5 +299,10 @@ print("The addition is :",sum)
 ![](https://i.imgur.com/2cfBOvx.png)
 
 
+**Todo**
 
 https://learning.oreilly.com/videos/strata-hadoop/9781491924143/9781491924143-video210705/ 
+
+```
+git pull && git add . && git commit -m 'adding new notes' && git push
+```
