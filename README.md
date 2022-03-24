@@ -14,6 +14,8 @@
 - [Installing Multi-Node Spark Cluster in AWS Cloud](#installing-multi-node-spark-cluster-in-aws-cloud)
   - [Step 1: Creating EMR cluster at AWS cloud](#step-1-creating-emr-cluster-at-aws-cloud)
       - [What is Amazon EMR?](#what-is-amazon-emr)
+  - [Step 2: Running PySpark on EMR cluster in AWS cloud using Spark-Shell](#step-2-running-pyspark-on-emr-cluster-in-aws-cloud-using-spark-shell)
+  - [Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud](#step-3-running-pyspark-on-notebook-on-emr-cluster-at-aws-cloud)
 
 You will able to install spark and also run spark shell and `pyspark` shell on your mac.
 
@@ -196,8 +198,8 @@ At AWS, Amazon EMR (Elastic Map & Reduce)  service can be used to create `Hadoop
 
 This mode is used by data scientist for interactive exploration directly with production cluster. Most cases we use notebooks for web base interface and graph capability.  
 
-## Step 1: Creating EMR cluster at AWS cloud
-
+## Step 1: Creating EMR cluster at AWS cloud 
+Creating spark shell on a real multi-node yarn cluster. 
 #### What is Amazon EMR? 
 
 Amazon EMR is the industry-leading cloud big data platform for data processing, interactive analysis, and machine learning using open source framework such as Apache Spark, Apache Hive and Presto. 
@@ -216,9 +218,33 @@ Benefits of using Amazon EMR are:
   ![](https://i.imgur.com/SImxHJB.png)
 - Create the cluster
   ![](https://i.imgur.com/qj0MMAv.png)
-- Note you get 3 slave and 1 master EC2 instances created. 
+- Note you get `3 slave (executer) and 1 master (driver)` EC2 instances created. 
 - Go to security group of master node, add new rule, and allow all traffic from your IP address.
-- SSH to Master instance. `ssh -i "fsm01.pem" ec2-user@ec2-18-209-11-152.compute-1.amazonaws.com`
-- ![](https://i.imgur.com/Gjclzgc.png)
- 
+- SSH to Master instance. `ssh -i "fsm01.pem" hadoop@ec2-18-209-11-152.compute-1.amazonaws.com`
+  
+  ![](https://i.imgur.com/mmYNBPJ.png)
 
+👉 make sure to login with `hadoop` user
+
+## Step 2: Running PySpark on EMR cluster in AWS cloud using Spark-Shell 
+ 
+- Run `pyspark` to create spark shell, when you want to quit the shell then press control D. 
+  ![](https://i.imgur.com/Hs2B3Ek.png)
+- My spark shell is running. My driver and executers already created and waiting for me to submit spark command. 
+  ![](https://i.imgur.com/Y4JTzTa.png)
+- You can see spark context UI to analyze the job by clicking on spark history server in EMR cluster at AWS. 
+   ![](https://i.imgur.com/FniKv4B.png)
+- Go to the spark history server URL
+  - It will show you list of application that you executed in the past. 
+  - Currently it is not showing any application so go ahead and close your pyspark shell and you see as many times you have opened pyspark and closed it they all are treated as a application. 
+   ![](https://i.imgur.com/Ohi0lwn.png)
+  - I closed pyspark shell 4 times. 
+  - Open any one and go to time line events. 
+    ![](https://i.imgur.com/2lTaraS.png)
+  - Note you got 1 driver and 3 executers. That is what you asked when you created your cluster.
+  - Click on executers tab and note you get 3 executers and check their memory allocation.
+    ![](https://i.imgur.com/0pb69s4.png)
+
+👉 Note mostly you will not use pyspark shell in real world people are using notebooks. 
+
+## Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud 
