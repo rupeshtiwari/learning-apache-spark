@@ -6,7 +6,7 @@
   - [Step 3: Installing `python3`](#step-3-installing-python3)
   - [Step 4: Running PySpark shell in your MAC laptop](#step-4-running-pyspark-shell-in-your-mac-laptop)
 - [Running small program with PySpark Shell in your MAC laptop](#running-small-program-with-pyspark-shell-in-your-mac-laptop)
-- [Analyzing Spark Jobs using Spark Context Web UI  in your MAC laptop](#analyzing-spark-jobs-using-spark-context-web-ui--in-your-mac-laptop)
+- [Analyzing Spark Jobs using Spark Context Web UI in your MAC laptop](#analyzing-spark-jobs-using-spark-context-web-ui-in-your-mac-laptop)
 - [Running Jupyter Notebook ( In local cluster and client mode ) in your MAC laptop](#running-jupyter-notebook--in-local-cluster-and-client-mode--in-your-mac-laptop)
   - [Step 1: Setting environment variable and starting notebook](#step-1-setting-environment-variable-and-starting-notebook)
   - [Step 2: installing `findspark`](#step-2-installing-findspark)
@@ -35,7 +35,9 @@ You will able to install spark and also run spark shell and `pyspark` shell on y
   `export SPARK_HOME=~/spark3/spark-3.2.1-bin-hadoop3.2`
 - Also put this script on startup command
   `sudo vim .zshrc`, Press “i” to edit, Press escape then :wq to save the file
+  
   ![](https://i.imgur.com/pHJ8Ros.png)
+
 - Open new terminal and check the spark home path
   - `echo $SPARK_HOME`
     ![](https://i.imgur.com/DP3x7iM.png)
@@ -60,6 +62,7 @@ If you already have `python3` then ignore this step. In order to check type `pyt
 3. Next setup `pyspark_python` environment variable to point python3:
    `export PYSPARK_PYTHON=python3`
 4. Check the path: `echo $PYSPARK_PYTHON`
+   
    ![](https://i.imgur.com/PhdrK4G.png)
 5. Also put this script on your startup command file `.zshrc` file in my case.
 
@@ -99,7 +102,7 @@ df.show()
 
 ![](https://i.imgur.com/5FNMXz9.png)
 
-# Analyzing Spark Jobs using Spark Context Web UI  in your MAC laptop
+# Analyzing Spark Jobs using Spark Context Web UI in your MAC laptop
 
 To monitor and investigate your spark application you can check spark context web UI.
 
@@ -190,64 +193,71 @@ spark.read.option("multiline","true").json("/Users/rupeshti/workdir/git-box/lear
 
 # Installing Multi-Node Spark Cluster in AWS Cloud
 
-At AWS, Amazon EMR (Elastic Map & Reduce)  service can be used to create `Hadoop` cluster with `spark`.
+At AWS, Amazon EMR (Elastic Map & Reduce) service can be used to create `Hadoop` cluster with `spark`.
 
 | cluster | mode        | tool                  |
 | ------- | ----------- | --------------------- |
 | Local   | Client Mode | spark-shell, Notebook |
 
-This mode is used by data scientist for interactive exploration directly with production cluster. Most cases we use notebooks for web base interface and graph capability.  
+This mode is used by data scientist for interactive exploration directly with production cluster. Most cases we use notebooks for web base interface and graph capability.
 
-## Step 1: Creating EMR cluster at AWS cloud 
-Creating spark shell on a real multi-node yarn cluster. 
-#### What is Amazon EMR? 
+## Step 1: Creating EMR cluster at AWS cloud
 
-Amazon EMR is the industry-leading cloud big data platform for data processing, interactive analysis, and machine learning using open source framework such as Apache Spark, Apache Hive and Presto. 
+Creating spark shell on a real multi-node yarn cluster.
+
+#### What is Amazon EMR?
+
+Amazon EMR is the industry-leading cloud big data platform for data processing, interactive analysis, and machine learning using open source framework such as Apache Spark, Apache Hive and Presto.
 
 Benefits of using Amazon EMR are:
-1. You do not need to manage compute capacity or open-source applications that will save you time and money. 
-2. Amazon EMR lets you to set up scaling rules to manage changing compute demand 
-3. You can set up CloudWatch alerts to notify you of changes in your infrastructure and take actions immediately 
-4. EMR has optimized runtime which speed up your analysis and save both time and money 
-5. You can submit your workload to either EC2 or EKS using EMR 
+
+1. You do not need to manage compute capacity or open-source applications that will save you time and money.
+2. Amazon EMR lets you to set up scaling rules to manage changing compute demand
+3. You can set up CloudWatch alerts to notify you of changes in your infrastructure and take actions immediately
+4. EMR has optimized runtime which speed up your analysis and save both time and money
+5. You can submit your workload to either EC2 or EKS using EMR
 
 - I am create cluster with 1 master and 3 worker nodes.
-![](https://i.imgur.com/LaDEEwU.png)
+  ![](https://i.imgur.com/LaDEEwU.png)
 - Use spark `version 2.4.8`
 - We will use notebook so lets also take `Zeppelin 0.10.0`
   ![](https://i.imgur.com/SImxHJB.png)
 - Create the cluster
   ![](https://i.imgur.com/qj0MMAv.png)
-- Note you get `3 slave (executer) and 1 master (driver)` EC2 instances created. 
+- Note you get `3 slave (executer) and 1 master (driver)` EC2 instances created.
 - Go to security group of master node, add new rule, and allow all traffic from your IP address.
 - SSH to Master instance. `ssh -i "fsm01.pem" hadoop@ec2-18-209-11-152.compute-1.amazonaws.com`
-  
+
   ![](https://i.imgur.com/mmYNBPJ.png)
 
 👉 make sure to login with `hadoop` user
 
-## Step 2: Running PySpark on EMR cluster in AWS cloud using Spark-Shell 
- 
-- Run `pyspark` to create spark shell, when you want to quit the shell then press control D. 
+## Step 2: Running PySpark on EMR cluster in AWS cloud using Spark-Shell
+
+- Run `pyspark` to create spark shell, when you want to quit the shell then press control D.
   ![](https://i.imgur.com/Hs2B3Ek.png)
-- My spark shell is running. My driver and executers already created and waiting for me to submit spark command. 
+- My spark shell is running. My driver and executers already created and waiting for me to submit spark command.
   ![](https://i.imgur.com/Y4JTzTa.png)
-- You can see spark context UI to analyze the job by clicking on spark history server in EMR cluster at AWS. 
-   ![](https://i.imgur.com/FniKv4B.png)
+- You can see spark context UI to analyze the job by clicking on spark history server in EMR cluster at AWS.
+  ![](https://i.imgur.com/FniKv4B.png)
 - Go to the spark history server URL
-  - It will show you list of application that you executed in the past. 
-  - Currently it is not showing any application so go ahead and close your pyspark shell and you see as many times you have opened pyspark and closed it they all are treated as a application. 
-   ![](https://i.imgur.com/Ohi0lwn.png)
-  - I closed pyspark shell 4 times. 
-  - Open any one and go to time line events. 
+  - It will show you list of application that you executed in the past.
+  - Currently it is not showing any application so go ahead and close your pyspark shell and you see as many times you have opened pyspark and closed it they all are treated as a application.
+    ![](https://i.imgur.com/Ohi0lwn.png)
+  - I closed pyspark shell 4 times.
+  - Open any one and go to time line events.
     ![](https://i.imgur.com/2lTaraS.png)
   - Note you got 1 driver and 3 executers. That is what you asked when you created your cluster.
   - Click on executers tab and note you get 3 executers and check their memory allocation.
     ![](https://i.imgur.com/0pb69s4.png)
 
+## Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud
 
+👉 Note: mostly you will not use pyspark shell in real world people are using notebooks.
+Therefore, we are going to use zeppelins notebook next.
 
-## Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud 
+**Visit Zeppelin URL**
 
-👉 Note: mostly you will not use pyspark shell in real world people are using notebooks. 
-Therefore, we are going to use zepeline notebook next. 
+![](https://i.imgur.com/HAu2Nmt.png)
+
+In your secured enterprise setup you have to ask your cluster operations team to provide you the URL and grant you the access for the same.
