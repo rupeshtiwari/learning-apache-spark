@@ -1,5 +1,5 @@
 # Install & Run Spark on your MAC machine & AWS Cloud step by step guide
-
+http://www.rupeshtiwari.com/learning-apache-spark/ 
 - [Install & Run Spark on your MAC machine & AWS Cloud step by step guide](#install--run-spark-on-your-mac-machine--aws-cloud-step-by-step-guide)
   - [Step 1: Install JAVA on your MAC](#step-1-install-java-on-your-mac)
   - [Step 2: Install Spark on your MAC](#step-2-install-spark-on-your-mac)
