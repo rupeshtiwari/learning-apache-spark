@@ -1,12 +1,14 @@
 # Install & Run Spark on your MAC machine & AWS Cloud step by step guide
-http://www.rupeshtiwari.com/learning-apache-spark/ 
+
+http://www.rupeshtiwari.com/learning-apache-spark/
+
 - [Install & Run Spark on your MAC machine & AWS Cloud step by step guide](#install--run-spark-on-your-mac-machine--aws-cloud-step-by-step-guide)
   - [Step 1: Install JAVA on your MAC](#step-1-install-java-on-your-mac)
   - [Step 2: Install Spark on your MAC](#step-2-install-spark-on-your-mac)
   - [Step 3: Installing `python3`](#step-3-installing-python3)
   - [Step 4: Running PySpark shell in your MAC laptop](#step-4-running-pyspark-shell-in-your-mac-laptop)
 - [Running small program with PySpark Shell in your MAC laptop](#running-small-program-with-pyspark-shell-in-your-mac-laptop)
-- [Analyzing Spark Jobs using Spark Context Web UI in your MAC laptop](#analyzing-spark-jobs-using-spark-context-web-ui-in-your-mac-laptop)
+  - [Analyzing Spark Jobs using Spark Context Web UI in your MAC laptop](#analyzing-spark-jobs-using-spark-context-web-ui-in-your-mac-laptop)
 - [Running Jupyter Notebook ( In local cluster and client mode ) in your MAC laptop](#running-jupyter-notebook--in-local-cluster-and-client-mode--in-your-mac-laptop)
   - [Step 1: Setting environment variable and starting notebook](#step-1-setting-environment-variable-and-starting-notebook)
   - [Step 2: installing `findspark`](#step-2-installing-findspark)
@@ -15,7 +17,8 @@ http://www.rupeshtiwari.com/learning-apache-spark/
   - [Step 1: Creating EMR cluster at AWS cloud](#step-1-creating-emr-cluster-at-aws-cloud)
       - [What is Amazon EMR?](#what-is-amazon-emr)
   - [Step 2: Running PySpark on EMR cluster in AWS cloud using Spark-Shell](#step-2-running-pyspark-on-emr-cluster-in-aws-cloud-using-spark-shell)
-  - [Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud](#step-3-running-pyspark-on-notebook-on-emr-cluster-at-aws-cloud)
+  - [Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud using Zeppelin](#step-3-running-pyspark-on-notebook-on-emr-cluster-at-aws-cloud-using-zeppelin)
+  - [Working with `spark-submit` on EMR cluster](#working-with-spark-submit-on-emr-cluster)
 
 You will able to install spark and also run spark shell and `pyspark` shell on your mac.
 
@@ -35,7 +38,7 @@ You will able to install spark and also run spark shell and `pyspark` shell on y
   `export SPARK_HOME=~/spark3/spark-3.2.1-bin-hadoop3.2`
 - Also put this script on startup command
   `sudo vim .zshrc`, Press “i” to edit, Press escape then :wq to save the file
-  
+
   ![](https://i.imgur.com/pHJ8Ros.png)
 
 - Open new terminal and check the spark home path
@@ -62,8 +65,9 @@ If you already have `python3` then ignore this step. In order to check type `pyt
 3. Next setup `pyspark_python` environment variable to point python3:
    `export PYSPARK_PYTHON=python3`
 4. Check the path: `echo $PYSPARK_PYTHON`
-   
+
    ![](https://i.imgur.com/PhdrK4G.png)
+
 5. Also put this script on your startup command file `.zshrc` file in my case.
 
    ![](https://i.imgur.com/J5EFm7c.png)
@@ -102,7 +106,7 @@ df.show()
 
 ![](https://i.imgur.com/5FNMXz9.png)
 
-# Analyzing Spark Jobs using Spark Context Web UI in your MAC laptop
+## Analyzing Spark Jobs using Spark Context Web UI in your MAC laptop
 
 To monitor and investigate your spark application you can check spark context web UI.
 
@@ -197,7 +201,7 @@ At AWS, Amazon EMR (Elastic Map & Reduce) service can be used to create `Hadoop`
 
 | cluster | mode        | tool                  |
 | ------- | ----------- | --------------------- |
-| Local   | Client Mode | spark-shell, Notebook |
+| YARN    | Client Mode | spark-shell, Notebook |
 
 This mode is used by data scientist for interactive exploration directly with production cluster. Most cases we use notebooks for web base interface and graph capability.
 
@@ -251,7 +255,7 @@ Benefits of using Amazon EMR are:
   - Click on executers tab and note you get 3 executers and check their memory allocation.
     ![](https://i.imgur.com/0pb69s4.png)
 
-## Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud
+## Step 3: Running PySpark on Notebook on EMR cluster at AWS cloud using Zeppelin
 
 👉 Note: mostly you will not use pyspark shell in real world people are using notebooks.
 Therefore, we are going to use zeppelins notebook next.
@@ -261,3 +265,39 @@ Therefore, we are going to use zeppelins notebook next.
 ![](https://i.imgur.com/HAu2Nmt.png)
 
 In your secured enterprise setup you have to ask your cluster operations team to provide you the URL and grant you the access for the same.
+
+Notebook is not like spark shell. So It is not connected to spark by default you have to run some spark command to connect. You can simply run `spark.version` command also.
+
+![](https://i.imgur.com/wfSK2PV.png)
+
+Create new notebook and run `spark.version` Default notebook zeppelin shell is skala shell. Therefore, you should use interpreter directive `%pyspark` so that you can run python code.
+
+![](https://i.imgur.com/9PhPHwP.png)
+
+## Working with `spark-submit` on EMR cluster
+
+| cluster | mode         | tool         |
+| ------- | ------------ | ------------ |
+| YARN    | Cluster Mode | spark-submit |
+
+This mode of operation is mostly used for executing spark application on your production cluster. `spark-submit --help` to check all options. 
+
+Let's create and submit a spark application. 
+
+- create `main.py` in master node
+
+```py
+import sys
+x=int(sys.argv[1])
+y=int(sys.argv[2])
+sum=x+y
+print("The addition is :",sum)
+```
+
+- Submit application `spark-submit main.py 1 3`
+
+![](https://i.imgur.com/2cfBOvx.png)
+
+
+
+https://learning.oreilly.com/videos/strata-hadoop/9781491924143/9781491924143-video210705/ 
