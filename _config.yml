@@ -1,1 +1,8 @@
-theme: jekyll-theme-cayman
+# theme: jekyll-theme-cayman
+
+theme: jekyll-theme-dinky
+google_analytics: ['UA-128916623-7']
+title: [Install & run Apache Spark on Mac and AWS cloud]
+description: [Learn Apache spark by doing hands on]
+github:
+  home_url: https://rupeshtiwari.com
