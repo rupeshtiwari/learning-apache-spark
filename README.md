@@ -118,6 +118,7 @@ To monitor and investigate your spark application you can check spark context we
 - When cluster created we did not pass number of thread so it took default number as `8` based on my laptop hardware resource available.
 - Storage Memory it took maximum `434.4 MB`. This is sum of overall JVM.
 - You can access this spark context UI till your spark shell is open. Once you quit spark shell you will loose the access to this UI.
+- Each Executer is a JVM that run on a independent machine.You don't have control which executer will run on which slave machine. Cluster manager is the guy who will assign executer to slave machine. 
 
 # Running Jupyter Notebook ( In local cluster and client mode ) in your MAC laptop
 
